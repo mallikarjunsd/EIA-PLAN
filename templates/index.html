@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}
+EIA-PLAN | Project Analysis
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+    Environmental Impact Assessment
+</h1>
+
+<p class="page-description">
+    Analyze a proposed project, identify environmental and disaster risks,
+    and optimize the project plan using mitigation interventions.
+</p>
+
+
+<div class="card">
+
+    <h2 class="card-title">
+        01 — Project Proposal
+    </h2>
+
+    <form action="{{ url_for('analyze') }}"
+          method="POST"
+          enctype="multipart/form-data">
+
+        <label>
+            Describe the proposed project
+        </label>
+
+        <textarea
+            name="project_text"
+            placeholder="Example:
+
+We are planning to establish a textile manufacturing plant on 120 acres near a river.
+
+The plant will consume approximately 2 million litres of water per day and generate 500000 litres of wastewater.
+
+The project will employ 800 workers.
+
+The plant will use chemical dyes and hazardous materials and operate continuously.
+
+A residential area is located approximately 2 km away."
+        ></textarea>
+
+
+        <div style="text-align:center; margin:25px 0;">
+            <strong>OR</strong>
+        </div>
+
+
+        <label>
+            Upload Project Proposal
+        </label>
+
+        <input
+            type="file"
+            name="project_file"
+            accept=".pdf,.docx,.txt"
+        >
+
+        <p style="margin-top:8px; color:#627d98; font-size:13px;">
+            Supported formats: PDF, DOCX, TXT
+        </p>
+
+
+        <br>
+
+        <button
+            type="submit"
+            class="btn btn-primary"
+        >
+            Analyze Project →
+        </button>
+
+    </form>
+
+</div>
+
+
+<div class="card">
+
+    <h2 class="card-title">
+        What EIA-PLAN does
+    </h2>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;">
+
+        <div>
+            <strong>① Extract</strong>
+            <p style="margin-top:8px;color:#627d98;">
+                Extracts project characteristics from the proposal.
+            </p>
+        </div>
+
+        <div>
+            <strong>② Assess</strong>
+            <p style="margin-top:8px;color:#627d98;">
+                Evaluates environmental and disaster-related factors.
+            </p>
+        </div>
+
+        <div>
+            <strong>③ Identify</strong>
+            <p style="margin-top:8px;color:#627d98;">
+                Detects major concerns and missing project information.
+            </p>
+        </div>
+
+        <div>
+            <strong>④ Optimize</strong>
+            <p style="margin-top:8px;color:#627d98;">
+                Simulates planning interventions and compares the revised plan.
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

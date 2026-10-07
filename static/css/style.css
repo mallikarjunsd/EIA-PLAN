@@ -1,0 +1,393 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7f9;
+    color: #1f2933;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    height: 72px;
+    background: #102a43;
+    color: white;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 50px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #39c6a3;
+}
+
+.nav-subtitle {
+    margin-left: 25px;
+    font-size: 14px;
+    color: #bcccdc;
+}
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+    width: 92%;
+    max-width: 1250px;
+
+    margin: 35px auto;
+
+    min-height: 70vh;
+}
+
+/* =========================
+   HEADINGS
+========================= */
+
+.page-title {
+    font-size: 32px;
+    color: #102a43;
+    margin-bottom: 10px;
+}
+
+.page-description {
+    color: #627d98;
+    margin-bottom: 30px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+    background: white;
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+    box-shadow: 0 3px 15px rgba(0,0,0,0.07);
+
+    border: 1px solid #e5e7eb;
+}
+
+.card-title {
+    font-size: 20px;
+    color: #102a43;
+
+    margin-bottom: 18px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+    display: inline-block;
+
+    border: none;
+    border-radius: 7px;
+
+    padding: 12px 22px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: #147d64;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0f6652;
+}
+
+.btn-secondary {
+    background: #e6f4f1;
+    color: #12634f;
+}
+
+/* =========================
+   FORMS
+========================= */
+
+textarea,
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #bcccdc;
+
+    border-radius: 7px;
+
+    font-size: 15px;
+
+    margin-top: 8px;
+}
+
+textarea {
+    min-height: 220px;
+    resize: vertical;
+}
+
+label {
+    display: block;
+
+    font-weight: 600;
+
+    margin-top: 15px;
+
+    color: #334e68;
+}
+
+/* =========================
+   ASSESSMENT TABLE
+========================= */
+
+.assessment-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-top: 15px;
+}
+
+.assessment-table th {
+    background: #102a43;
+    color: white;
+
+    padding: 14px;
+
+    text-align: left;
+}
+
+.assessment-table td {
+    padding: 14px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.assessment-table tr:hover {
+    background: #f8fafc;
+}
+
+/* =========================
+   RISK BADGES
+========================= */
+
+.risk-badge {
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.risk-low {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.risk-moderate {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.risk-high {
+    background: #fed7aa;
+    color: #9a3412;
+}
+
+.risk-critical {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* =========================
+   OVERALL RISK
+========================= */
+
+.overall-risk {
+    text-align: center;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    background: #102a43;
+
+    color: white;
+
+    margin-bottom: 25px;
+}
+
+.risk-score {
+    font-size: 52px;
+
+    font-weight: 700;
+
+    margin: 10px 0;
+}
+
+.risk-label {
+    font-size: 18px;
+
+    font-weight: 600;
+}
+
+/* =========================
+   CONCERNS
+========================= */
+
+.concern-list,
+.mitigation-list,
+.missing-list {
+    list-style: none;
+}
+
+.concern-list li,
+.mitigation-list li,
+.missing-list li {
+    padding: 10px 0;
+
+    border-bottom: 1px solid #edf2f7;
+}
+
+.concern-list li::before {
+    content: "•";
+
+    color: #d64545;
+
+    font-weight: bold;
+
+    margin-right: 10px;
+}
+
+.mitigation-list li::before {
+    content: "✓";
+
+    color: #147d64;
+
+    font-weight: bold;
+
+    margin-right: 10px;
+}
+
+.missing-list li::before {
+    content: "⚠";
+
+    margin-right: 10px;
+}
+
+/* =========================
+   DATA WARNING
+========================= */
+
+.warning-box {
+    background: #fff8e6;
+
+    border: 1px solid #f0c36d;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    margin-bottom: 25px;
+}
+
+.warning-title {
+    color: #8a5a00;
+
+    font-weight: 700;
+
+    margin-bottom: 10px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+
+    padding: 30px;
+
+    background: #102a43;
+
+    color: #bcccdc;
+
+    margin-top: 50px;
+
+    font-size: 14px;
+}
+
+.footer-note {
+    margin-top: 8px;
+
+    font-size: 12px;
+
+    color: #829ab1;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .nav-subtitle {
+        display: none;
+    }
+
+    .container {
+        width: 94%;
+    }
+
+    .page-title {
+        font-size: 25px;
+    }
+
+    .assessment-table {
+        font-size: 13px;
+    }
+
+    .assessment-table th,
+    .assessment-table td {
+        padding: 9px;
+    }
+
+}

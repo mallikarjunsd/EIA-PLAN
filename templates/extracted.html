@@ -1,0 +1,235 @@
+{% extends "base.html" %}
+
+{% block title %}
+EIA-PLAN | Project Information
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+    Project Information Extracted
+</h1>
+
+<p class="page-description">
+    The system extracted the following information from your project proposal.
+    Review the information before proceeding to environmental assessment.
+</p>
+
+
+<!-- PROJECT INFORMATION -->
+
+<div class="card">
+
+    <h2 class="card-title">
+        Extracted Project Characteristics
+    </h2>
+
+    <table class="assessment-table">
+
+        <tr>
+            <th>Parameter</th>
+            <th>Extracted Value</th>
+        </tr>
+
+        <tr>
+            <td>Project Type</td>
+            <td>{{ data.project_type or "Not provided" }}</td>
+        </tr>
+
+        <tr>
+            <td>Land Area</td>
+            <td>
+                {% if data.land_area %}
+                    {{ data.land_area }} acres
+                {% else %}
+                    Not provided
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>Water Consumption</td>
+            <td>
+                {% if data.water_consumption %}
+                    {{ data.water_consumption }} MLD
+                {% else %}
+                    Not provided
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>Effluent Generation</td>
+            <td>
+                {% if data.effluent_generation %}
+                    {{ data.effluent_generation }} litres/day
+                {% else %}
+                    Not provided
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>Workforce</td>
+            <td>
+                {% if data.workforce %}
+                    {{ data.workforce }}
+                {% else %}
+                    Not provided
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>River / Water Body Distance</td>
+            <td>
+                {% if data.river_distance %}
+                    {{ data.river_distance }} km
+                {% else %}
+                    Not provided
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>Hazardous Materials</td>
+            <td>
+                {% if data.hazardous_material %}
+                    Yes
+                {% else %}
+                    No
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>Effluent Generation</td>
+            <td>
+                {% if data.has_effluent %}
+                    Yes
+                {% else %}
+                    No
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>Air Emissions</td>
+            <td>
+                {% if data.has_emissions %}
+                    Yes
+                {% else %}
+                    Not specified
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>Flood Concern</td>
+            <td>
+                {% if data.has_flood %}
+                    Yes
+                {% else %}
+                    Not specified
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>Forest / Ecological Sensitivity</td>
+            <td>
+                {% if data.has_forest %}
+                    Yes
+                {% else %}
+                    Not specified
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td>Nearby Population</td>
+            <td>
+                {% if data.has_population %}
+                    Yes
+                {% else %}
+                    Not specified
+                {% endif %}
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+
+
+<!-- MISSING INFORMATION -->
+
+{% if missing_information %}
+
+<div class="warning-box">
+
+    <div class="warning-title">
+        ⚠ Additional Information Required
+    </div>
+
+    <p style="margin-bottom:15px;">
+        The system identified information that was not explicitly provided
+        in the project proposal.
+    </p>
+
+    <ul class="missing-list">
+
+        {% for item in missing_information %}
+
+        <li>
+            {{ item }}
+        </li>
+
+        {% endfor %}
+
+    </ul>
+
+</div>
+
+{% endif %}
+
+
+<!-- STATUS -->
+
+<div class="card">
+
+    <h2 class="card-title">
+        Assessment Readiness
+    </h2>
+
+    {% if missing_information %}
+
+        <p style="color:#8a5a00; margin-bottom:20px;">
+            ⚠ Preliminary assessment can be performed, but additional
+            project information should be provided for a more complete
+            assessment.
+        </p>
+
+    {% else %}
+
+        <p style="color:#147d64; margin-bottom:20px;">
+            ✓ Required project information is available.
+        </p>
+
+    {% endif %}
+
+
+    <form action="{{ url_for('assess') }}" method="POST">
+
+        <button
+            type="submit"
+            class="btn btn-primary"
+        >
+            Run Environmental Assessment →
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

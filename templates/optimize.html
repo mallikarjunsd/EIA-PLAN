@@ -1,0 +1,346 @@
+{% extends "base.html" %}
+
+{% block title %}
+EIA-PLAN | Project Optimization
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+    Project Plan Optimization
+</h1>
+
+<p class="page-description">
+    Select realistic planning interventions and simulate how they may
+    change the project's environmental risk profile.
+</p>
+
+
+<!-- CURRENT PROJECT -->
+
+<div class="card">
+
+    <h2 class="card-title">
+        Current Project Risk
+    </h2>
+
+    <div style="display:flex; align-items:center; gap:30px; flex-wrap:wrap;">
+
+        <div>
+            <div style="font-size:14px; color:#627d98;">
+                Current Environmental Risk Index
+            </div>
+
+            <div style="font-size:42px; font-weight:700; color:#102a43;">
+                {{ "%.2f"|format(assessment.overall_score) }}
+                <span style="font-size:18px;">/100</span>
+            </div>
+        </div>
+
+        <div>
+            <span class="risk-badge risk-{{ assessment.overall_level|lower }}">
+                {{ assessment.overall_level }}
+            </span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- OPTIMIZATION FORM -->
+
+<form action="{{ url_for('simulate') }}" method="POST">
+
+
+    <!-- WATER -->
+
+    <div class="card">
+
+        <h2 class="card-title">
+            💧 Water Resource Management
+        </h2>
+
+        <p style="color:#627d98; margin-bottom:20px;">
+            Reduce freshwater demand through recycling and reuse.
+        </p>
+
+        <label>
+            Water Recycling & Reuse
+        </label>
+
+        <input
+            type="range"
+            name="water_recycling"
+            min="0"
+            max="100"
+            value="0"
+            oninput="waterValue.value=this.value"
+        >
+
+        <div style="margin-top:8px;">
+            Implementation Level:
+            <strong>
+                <output id="waterValue">0</output>%
+            </strong>
+        </div>
+
+        <p style="font-size:13px; color:#829ab1; margin-top:8px;">
+            Example: recycling process water and reusing treated water.
+        </p>
+
+    </div>
+
+
+    <!-- EFFLUENT -->
+
+    <div class="card">
+
+        <h2 class="card-title">
+            🧪 Effluent Management
+        </h2>
+
+        <p style="color:#627d98; margin-bottom:20px;">
+            Improve wastewater treatment and reduce untreated discharge risk.
+        </p>
+
+        <label>
+            Effluent Treatment System
+        </label>
+
+        <input
+            type="range"
+            name="effluent_treatment"
+            min="0"
+            max="100"
+            value="0"
+            oninput="effluentValue.value=this.value"
+        >
+
+        <div style="margin-top:8px;">
+            Implementation Level:
+            <strong>
+                <output id="effluentValue">0</output>%
+            </strong>
+        </div>
+
+        <p style="font-size:13px; color:#829ab1; margin-top:8px;">
+            Example: upgraded ETP, monitoring and controlled discharge.
+        </p>
+
+    </div>
+
+
+    <!-- HAZARDOUS MATERIAL -->
+
+    <div class="card">
+
+        <h2 class="card-title">
+            ⚠️ Hazardous Material Safety
+        </h2>
+
+        <p style="color:#627d98; margin-bottom:20px;">
+            Reduce exposure through containment and safer storage practices.
+        </p>
+
+        <label>
+            Hazardous Material Containment
+        </label>
+
+        <input
+            type="range"
+            name="hazardous_material_control"
+            min="0"
+            max="100"
+            value="0"
+            oninput="hazardValue.value=this.value"
+        >
+
+        <div style="margin-top:8px;">
+            Implementation Level:
+            <strong>
+                <output id="hazardValue">0</output>%
+            </strong>
+        </div>
+
+        <p style="font-size:13px; color:#829ab1; margin-top:8px;">
+            Example: secondary containment, controlled storage and leak detection.
+        </p>
+
+    </div>
+
+
+    <!-- FLOOD -->
+
+    <div class="card">
+
+        <h2 class="card-title">
+            🌊 Flood Protection
+        </h2>
+
+        <p style="color:#627d98; margin-bottom:20px;">
+            Improve resilience against flood and extreme rainfall exposure.
+        </p>
+
+        <label>
+            Flood Protection Measures
+        </label>
+
+        <input
+            type="range"
+            name="flood_protection"
+            min="0"
+            max="100"
+            value="0"
+            oninput="floodValue.value=this.value"
+        >
+
+        <div style="margin-top:8px;">
+            Implementation Level:
+            <strong>
+                <output id="floodValue">0</output>%
+            </strong>
+        </div>
+
+        <p style="font-size:13px; color:#829ab1; margin-top:8px;">
+            Example: drainage improvement, site protection and emergency
+            flood response planning.
+        </p>
+
+    </div>
+
+
+    <!-- ECOLOGY -->
+
+    <div class="card">
+
+        <h2 class="card-title">
+            🌱 Ecological Protection
+        </h2>
+
+        <p style="color:#627d98; margin-bottom:20px;">
+            Reduce ecological disturbance through green-belt and site
+            protection measures.
+        </p>
+
+        <label>
+            Green Belt & Ecological Protection
+        </label>
+
+        <input
+            type="range"
+            name="ecology_protection"
+            min="0"
+            max="100"
+            value="0"
+            oninput="ecologyValue.value=this.value"
+        >
+
+        <div style="margin-top:8px;">
+            Implementation Level:
+            <strong>
+                <output id="ecologyValue">0</output>%
+            </strong>
+        </div>
+
+    </div>
+
+
+    <!-- COMMUNITY -->
+
+    <div class="card">
+
+        <h2 class="card-title">
+            👥 Community Protection
+        </h2>
+
+        <p style="color:#627d98; margin-bottom:20px;">
+            Reduce community exposure through safety systems and
+            emergency communication.
+        </p>
+
+        <label>
+            Community Safety Measures
+        </label>
+
+        <input
+            type="range"
+            name="community_protection"
+            min="0"
+            max="100"
+            value="0"
+            oninput="communityValue.value=this.value"
+        >
+
+        <div style="margin-top:8px;">
+            Implementation Level:
+            <strong>
+                <output id="communityValue">0</output>%
+            </strong>
+        </div>
+
+    </div>
+
+
+    <!-- EMISSIONS -->
+
+    <div class="card">
+
+        <h2 class="card-title">
+            🏭 Air Emission Control
+        </h2>
+
+        <p style="color:#627d98; margin-bottom:20px;">
+            Control industrial emissions through appropriate pollution
+            control systems.
+        </p>
+
+        <label>
+            Emission Control Technology
+        </label>
+
+        <input
+            type="range"
+            name="emission_control"
+            min="0"
+            max="100"
+            value="0"
+            oninput="emissionValue.value=this.value"
+        >
+
+        <div style="margin-top:8px;">
+            Implementation Level:
+            <strong>
+                <output id="emissionValue">0</output>%
+            </strong>
+        </div>
+
+    </div>
+
+
+    <!-- SIMULATE -->
+
+    <div class="card" style="text-align:center;">
+
+        <h2 class="card-title">
+            Simulate Revised Project
+        </h2>
+
+        <p style="color:#627d98; margin-bottom:25px;">
+            The selected interventions will be applied to the project
+            model and the environmental assessment will be recalculated.
+        </p>
+
+        <button
+            type="submit"
+            class="btn btn-primary"
+            style="font-size:17px; padding:15px 30px;"
+        >
+            ⚙ Simulate Revised Project →
+        </button>
+
+    </div>
+
+</form>
+
+{% endblock %}

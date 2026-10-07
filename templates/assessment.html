@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block title %}
+EIA-PLAN | Environmental Assessment
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+    Project Environmental Assessment
+</h1>
+
+<p class="page-description">
+    Preliminary environmental and disaster-risk assessment based on the
+    project information provided.
+</p>
+
+
+<!-- OVERALL RISK -->
+
+<div class="overall-risk">
+
+    <div>
+        Overall Environmental Risk Index
+    </div>
+
+    <div class="risk-score">
+        {{ "%.2f"|format(assessment.overall_score) }}
+        <span style="font-size:20px;">/ 100</span>
+    </div>
+
+    <div class="risk-label">
+        {{ assessment.overall_level }}
+    </div>
+
+</div>
+
+
+<!-- FACTOR ASSESSMENT -->
+
+<div class="card">
+
+    <h2 class="card-title">
+        Environmental Risk Factors
+    </h2>
+
+    <table class="assessment-table">
+
+        <thead>
+            <tr>
+                <th>Environmental Factor</th>
+                <th>Risk Level</th>
+                <th>Score</th>
+                <th>Key Factors</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for factor, details in assessment.factors.items() %}
+
+            <tr>
+
+                <td>
+                    <strong>{{ factor }}</strong>
+                </td>
+
+                <td>
+
+                    {% set level = details.level|lower %}
+
+                    <span class="risk-badge risk-{{ level }}">
+                        {{ details.level }}
+                    </span>
+
+                </td>
+
+                <td>
+                    {{ details.score }}/100
+                </td>
+
+                <td>
+
+                    {% if details.reasons %}
+
+                        <ul style="padding-left:18px;">
+
+                            {% for reason in details.reasons %}
+
+                                <li style="margin-bottom:5px;">
+                                    {{ reason }}
+                                </li>
+
+                            {% endfor %}
+
+                        </ul>
+
+                    {% else %}
+
+                        No major contributing factor identified.
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<!-- MAJOR CONCERNS -->
+
+<div class="card">
+
+    <h2 class="card-title">
+        Major Concerns
+    </h2>
+
+    {% if assessment.major_concerns %}
+
+        <ul class="concern-list">
+
+            {% for concern in assessment.major_concerns %}
+
+                <li>
+                    {{ concern }}
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    {% else %}
+
+        <p>
+            No major concerns identified.
+        </p>
+
+    {% endif %}
+
+</div>
+
+
+<!-- REQUIRED MITIGATION -->
+
+<div class="card">
+
+    <h2 class="card-title">
+        Required Mitigation
+    </h2>
+
+    {% if assessment.mitigation %}
+
+        <ul class="mitigation-list">
+
+            {% for item in assessment.mitigation %}
+
+                <li>
+                    {{ item }}
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    {% else %}
+
+        <p>
+            No specific mitigation measures identified.
+        </p>
+
+    {% endif %}
+
+</div>
+
+
+<!-- PLANNING OPTIMIZATION -->
+
+<div class="card" style="text-align:center;">
+
+    <h2 class="card-title">
+        Improve the Project Plan
+    </h2>
+
+    <p style="color:#627d98; margin-bottom:20px;">
+
+        Use project-planning interventions to simulate a revised
+        and environmentally safer project configuration.
+
+    </p>
+
+    <a
+        href="{{ url_for('optimize') }}"
+        class="btn btn-primary"
+    >
+        🔧 Optimize Project Plan →
+    </a>
+
+</div>
+
+
+{% endblock %}

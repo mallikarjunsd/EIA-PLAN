@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}EIA-PLAN{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">
+            EIA<span>-PLAN</span>
+        </div>
+
+        <div class="nav-subtitle">
+            Environmental Impact Assessment & Project Planning
+        </div>
+    </header>
+
+    <main class="container">
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+    <footer>
+        <p>
+            EIA-PLAN — AI-Assisted Environmental Decision Support System
+        </p>
+
+        <p class="footer-note">
+            Academic preliminary assessment tool. Not a substitute for
+            statutory environmental clearance or regulatory EIA.
+        </p>
+    </footer>
+
+</body>
+</html>
